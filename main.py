@@ -26,7 +26,7 @@ def downloadPlaylist(url):
         video.streams.get_highest_resolution().download(output_path=folderName)
     print("Downloaded all videos succesfully.")
 
-prompt = "YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Download a playlist\n3. Exit"
+prompt = input("YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Download a playlist\n3. Exit\n: ")
 if prompt == "1":
     i = input("Enter the video URL: ")
     downloadVideo(i)
@@ -35,5 +35,5 @@ if prompt == "2":
     downloadPlaylist(i)
 if prompt == "3":
     sys.exit("Exited.")
-if int(prompt) <= 3:
+if int(prompt) <= "3":
     print("Not a valid option.")
