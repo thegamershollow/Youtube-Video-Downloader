@@ -30,10 +30,10 @@ prompt = input("YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Dow
 if prompt == "1":
     i = input("Enter the video URL: ")
     downloadVideo(i)
-if prompt == "2":
+elif prompt == "2":
     i = input("Enter the playlist url: ")
     downloadPlaylist(i)
-if prompt == "3":
+elif prompt == "3":
     sys.exit("Exited.")
-if int(prompt) <= 3:
+elif int(prompt) <= 3:
     print("Not a valid option.")
