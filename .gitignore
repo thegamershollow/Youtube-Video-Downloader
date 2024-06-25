@@ -1,3 +1,5 @@
 *.mp4
 *.mov
 *.webm
+*streams.txt
+.DS_Store
