@@ -35,5 +35,5 @@ if prompt == "2":
     downloadPlaylist(i)
 if prompt == "3":
     sys.exit("Exited.")
-if int(prompt) <= "3":
+if int(prompt) <= 3:
     print("Not a valid option.")
