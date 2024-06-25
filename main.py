@@ -24,6 +24,7 @@ def downloadPlaylist(url):
     for index, video in enumerate(ytPlaylist.videos, start=1):
         print("Downloading:", video.title)
         video.streams.get_highest_resolution().download(output_path=folderName)
+    print("Downloaded all videos succesfully.")
 
 prompt = "YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Download a playlist\n3. Exit"
 if prompt == "1":
