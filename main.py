@@ -27,6 +27,7 @@ def remove_emojis(data):
                       "]+", re.UNICODE)
     return re.sub(emoj, '', data)
 
+# function to convert a string into alphanumeric text.
 def make_alpha_numeric(string):
     return ''.join(char for char in string if char.isalnum())
 
@@ -56,6 +57,7 @@ def downloadPlaylist(url):
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
     print("Downloaded all videos succesfully.")
 
+# prompt for the programs terminal interface.
 prompt = input("YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Download a playlist\n3. Exit\n: ")
 if prompt == "1":
     i = input("Enter the video URL: ")
@@ -65,5 +67,5 @@ elif prompt == "2":
     downloadPlaylist(i)
 elif prompt == "3":
     sys.exit("Exited.")
-elif int(prompt) >= 3 or 0:
+elif int(prompt) >= 3:
     print("Not a valid option.")
