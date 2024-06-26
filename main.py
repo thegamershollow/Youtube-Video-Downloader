@@ -4,6 +4,7 @@ import os
 import sys
 import re
 
+# function to remove emojis and other unicode characters that could throw errors
 def remove_emojis(data):
     emoj = re.compile("["
         u"\U0001F600-\U0001F64F"  # emoticons
@@ -36,7 +37,6 @@ def downloadVideo(url):
     print(f"Downloading '{ytTitle}' to {os.getcwd()}")
     video = yt.streams.filter(file_extension='mp4',only_audio=False)
     dVideo = video[1]
-    videoName = make_alpha_numeric(ytTitle)
     dVideo.download(filename=f"{ytTitle}.mp4")
     print(f"Downloaded '{ytTitle}' succesfully!")
 
@@ -49,11 +49,10 @@ def downloadPlaylist(url):
     totalVideoCount = len(ytPlaylist.videos)
     print("Total videos in playlist: ", totalVideoCount)
     for index, video in enumerate(ytPlaylist.videos, start=1):
-        print("Downloading:", video.title)
+        print(f"Downloading: {video.title}")
         ytTitle = remove_emojis(video.title)
         videos = video.streams.filter(file_extension='mp4',only_audio=False)
         dVideo = videos[1]
-        videoName = make_alpha_numeric(ytTitle)
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
     print("Downloaded all videos succesfully.")
 
@@ -66,5 +65,5 @@ elif prompt == "2":
     downloadPlaylist(i)
 elif prompt == "3":
     sys.exit("Exited.")
-elif int(prompt) <= 3:
+elif int(prompt) >= 3 or 0:
     print("Not a valid option.")
