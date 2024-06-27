@@ -3,6 +3,8 @@ from pytube import Playlist
 import os
 import sys
 import re
+import requests
+import shutil
 
 # function to remove emojis and other unicode characters that could throw errors
 def remove_emojis(data):
@@ -36,6 +38,11 @@ def downloadVideo(url):
     yt = YouTube(url)
     ytTitle = remove_emojis(yt.title)
     print(f"Downloading '{ytTitle}' to {os.getcwd()}")
+    thumbnail = yt.thumbnail_url
+    response = requests.get(thumbnail, stream=True)
+    with open(f"{ytTitle}.jpg", 'wb') as out_file:
+        shutil.copyfileobj(response.raw, out_file)
+    del response
     video = yt.streams.filter(file_extension='mp4',only_audio=False)
     dVideo = video[1]
     dVideo.download(filename=f"{ytTitle}.mp4")
@@ -44,7 +51,6 @@ def downloadVideo(url):
 # function to download an entire youtube playlist
 def downloadPlaylist(url):
     ytPlaylist = Playlist(url)
-    
     folderName = make_alpha_numeric(ytPlaylist.title)
     os.mkdir(folderName)
     totalVideoCount = len(ytPlaylist.videos)
@@ -52,6 +58,11 @@ def downloadPlaylist(url):
     for index, video in enumerate(ytPlaylist.videos, start=1):
         print(f"Downloading: {video.title}")
         ytTitle = remove_emojis(video.title)
+        thumbnail = video.thumbnail_url
+        response = requests.get(thumbnail, stream=True)
+        with open(f"{ytTitle}.jpg", 'wb') as out_file:
+            shutil.copyfileobj(response.raw, out_file)
+        del response
         videos = video.streams.filter(file_extension='mp4',only_audio=False)
         dVideo = videos[1]
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
