@@ -1,5 +1,7 @@
 from pytube import YouTube
 import re
+import requests
+import shutil
 def remove_emojis(data):
     emoj = re.compile("["
         u"\U0001F600-\U0001F64F"  # emoticons
@@ -23,14 +25,12 @@ def remove_emojis(data):
     return re.sub(emoj, '', data)
 
 
-url = 'https://m.youtube.com/watch?v=X9SoIejJjwA'
+url = 'https://m.youtube.com/watch?v=gK-RF5CVu_M'
 yt = YouTube(url)
 download = yt.streams.filter(file_extension='mp4',only_audio=False)
-#for each in download:
-#    print(each)
-dVideo = download[1]
-print(dVideo)
 ytTitle = remove_emojis(yt.title)
-dVideo.download(filename=f"{ytTitle}.mp4")
-#dVideo = download
-#dVideo.download()
+thumbnail = yt.thumbnail_url
+response = requests.get(thumbnail, stream=True)
+with open(f"{ytTitle}.jpg", 'wb') as out_file:
+    shutil.copyfileobj(response.raw, out_file)
+del response
