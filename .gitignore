@@ -3,3 +3,5 @@
 *.webm
 *streams.txt
 .DS_Store
+*.jpg
+*.jpeg
