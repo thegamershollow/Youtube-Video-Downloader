@@ -6,6 +6,7 @@ import sys
 import re
 import requests
 import shutil
+import argparse
 
 # function to remove emojis and other unicode characters that could throw errors
 def remove_emojis(data):
@@ -88,16 +89,12 @@ def downloadPlaylist(url):
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
     print("Downloaded all videos succesfully.")
 
-# prompt for the programs terminal interface.
-prompt = input("YouTube Video/Playlist Downloader\n\n1. Download a video\n2. Download a playlist\n3. Exit\n: ")
-# if statement to get the value inputed in the prompt
-if prompt == "1":
-    i = input("Enter the video URL: ")
-    downloadVideo(i)
-elif prompt == "2":
-    i = input("Enter the playlist url: ")
-    downloadPlaylist(i)
-elif prompt == "3":
-    sys.exit("Exited.")
-elif int(prompt) >= 3:
-    print("Not a valid option.")
+
+parser = argparse.ArgumentParser(description = "A YouTube video downloader")
+parser.add_argument('-v','--video', type = str, help = "Downloads a video if a valid url is provided.")
+parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid url is provided.")
+args = parser.parse_args()
+if len(args.video) != 0:
+    downloadVideo(args.video)
+if len(args.playlist) !=0:
+    downloadPlaylist(args.playlist)
