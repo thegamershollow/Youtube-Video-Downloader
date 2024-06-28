@@ -129,9 +129,9 @@ parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube 
 args = parser.parse_args()
 
 # executes function if arg called
-if len(args.video) != 0:
+if args.video == '':
     downloadVideo(args.video)
 
 # executes function if arg called
-if len(args.playlist) !=0:
+if args.playlist == '':
     downloadPlaylist(args.playlist)
