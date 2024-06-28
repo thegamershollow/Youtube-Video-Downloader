@@ -128,10 +128,10 @@ parser.add_argument('-v','--video', type = str, help = "Downloads a video if a v
 parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid url is provided.")
 args = parser.parse_args()
 
-# executes function if arg called
-if args.video == '':
-    downloadVideo(args.video)
+# Executes function if arg called
+if args.video:
+    download_video(args.video)
 
-# executes function if arg called
-if args.playlist == '':
-    downloadPlaylist(args.playlist)
+# Executes function if arg called
+if args.playlist:
+    download_playlist(args.playlist)
