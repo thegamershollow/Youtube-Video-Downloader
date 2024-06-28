@@ -89,12 +89,16 @@ def downloadPlaylist(url):
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
     print("Downloaded all videos succesfully.")
 
-
+# create parser
 parser = argparse.ArgumentParser(description = "A YouTube video downloader")
+# add arg for video download
 parser.add_argument('-v','--video', type = str, help = "Downloads a video if a valid url is provided.")
+# add arg for playlist download
 parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid url is provided.")
 args = parser.parse_args()
+# executes function if arg called
 if len(args.video) != 0:
     downloadVideo(args.video)
+# executes function if arg called
 if len(args.playlist) !=0:
     downloadPlaylist(args.playlist)
