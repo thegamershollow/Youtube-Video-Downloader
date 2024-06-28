@@ -37,68 +37,93 @@ def make_alpha_numeric(string):
 
 # function to download a single youtube video
 def downloadVideo(url):
+
     # set 'yt' variable to Youtube function
     yt = YouTube(url)
+
     # removes emoji from the title of the video
     ytTitle = remove_emojis(yt.title)
+
     print(f"Downloading '{ytTitle}' to {os.getcwd()}")
+
     # get the thumbnail url
     thumbnail = yt.thumbnail_url
+
     # get the thumbnail from url using requests
     response = requests.get(thumbnail, stream=True)
+
     # open the file that is grabbed from requests and saves it
     with open(f"{ytTitle}.jpg", 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
     del response
+
     # get the video stream
     video = yt.streams.filter(file_extension='mp4',only_audio=False)
+
     # get the highest res of the video 
     dVideo = video[1]
+
     # downloads the video
     dVideo.download(filename=f"{ytTitle}.mp4")
     print(f"Downloaded '{ytTitle}' succesfully!")
 
 # function to download an entire youtube playlist
 def downloadPlaylist(url):
+    
     # set 'ytPlaylist' variable to the Playlist function
     ytPlaylist = Playlist(url)
+    
     # converts the video title to an alphanumeric string
     folderName = make_alpha_numeric(ytPlaylist.title)
+    
     # creates an empty folder to save the videos to
     os.mkdir(folderName)
+    
     # gets total video count in playlist
     totalVideoCount = len(ytPlaylist.videos)
+    
     print("Total videos in playlist: ", totalVideoCount)
     for index, video in enumerate(ytPlaylist.videos, start=1):
         print(f"Downloading: {video.title}")
+        
         # removes the emojis from the video title
         ytTitle = remove_emojis(video.title)
+        
         # gets the thumbnail url
         thumbnail = video.thumbnail_url
+        
         # get the thumbnail from url using requests
         response = requests.get(thumbnail, stream=True)
+        
         # open the file that is grabbed from requests and saves it
         with open(f"{ytTitle}.jpg", 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
         del response
+        
         # gets the video stream
         videos = video.streams.filter(file_extension='mp4',only_audio=False)
+        
         # gets the highest res of the video
         dVideo = videos[1]
+        
         # downloads the video
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
     print("Downloaded all videos succesfully.")
 
 # create parser
 parser = argparse.ArgumentParser(description = "A YouTube video downloader")
+
 # add arg for video download
 parser.add_argument('-v','--video', type = str, help = "Downloads a video if a valid url is provided.")
+
 # add arg for playlist download
 parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid url is provided.")
 args = parser.parse_args()
+
 # executes function if arg called
 if len(args.video) != 0:
     downloadVideo(args.video)
+
 # executes function if arg called
 if len(args.playlist) !=0:
     downloadPlaylist(args.playlist)
