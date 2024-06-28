@@ -130,8 +130,8 @@ args = parser.parse_args()
 
 # Executes function if arg called
 if args.video:
-    download_video(args.video)
+    downloadVideo(args.video)
 
 # Executes function if arg called
 if args.playlist:
-    download_playlist(args.playlist)
+    downloadPlaylist(args.playlist)
