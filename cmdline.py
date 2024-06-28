@@ -43,7 +43,8 @@ def downloadVideo(url):
 
     # removes emoji from the title of the video
     ytTitle = remove_emojis(yt.title)
-
+    
+    # prints what video is getting downloaded
     print(f"Downloading '{ytTitle}' to {os.getcwd()}")
 
     # get the thumbnail url
@@ -65,6 +66,8 @@ def downloadVideo(url):
 
     # downloads the video
     dVideo.download(filename=f"{ytTitle}.mp4")
+
+    # prints when the video is succesfully downloaded
     print(f"Downloaded '{ytTitle}' succesfully!")
 
 # function to download an entire youtube playlist
@@ -82,7 +85,10 @@ def downloadPlaylist(url):
     # gets total video count in playlist
     totalVideoCount = len(ytPlaylist.videos)
     
+    # prints the total videos in the playlist
     print("Total videos in playlist: ", totalVideoCount)
+    
+    # for loop to download all the videos
     for index, video in enumerate(ytPlaylist.videos, start=1):
         print(f"Downloading: {video.title}")
         
@@ -108,6 +114,8 @@ def downloadPlaylist(url):
         
         # downloads the video
         dVideo.download(filename=f"{ytTitle}.mp4",output_path=folderName)
+    
+    # prints when all the video are succesfully downloaded
     print("Downloaded all videos succesfully.")
 
 # create parser
