@@ -1,5 +1,7 @@
 # Youtube Video Downloader
 
-A simple Youtube video downloader python script
+This is a simple python based commandline tool that allows you to download YouTube playlists and videos in high quality hd. It uses the PyTube library to work and downloads the video thumbnail as well.
 
-needs the pytube python module installed to work.
+### Using the tool
+
+Clone the github repo, then install pytube from pip.
