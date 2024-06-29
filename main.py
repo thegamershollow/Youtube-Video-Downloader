@@ -80,7 +80,7 @@ def downloadPlaylist(url):
     folderName = make_alpha_numeric(ytPlaylist.title)
     
     # creates an empty folder to save the videos to
-    os.mkdir(folderName)
+    os.mkdir(folderName, exist_ok=True)
     
     # gets total video count in playlist
     totalVideoCount = len(ytPlaylist.videos)
