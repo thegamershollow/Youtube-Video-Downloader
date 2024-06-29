@@ -122,10 +122,10 @@ def downloadPlaylist(url):
 parser = argparse.ArgumentParser(description = "A YouTube video downloader")
 
 # add arg for video download
-parser.add_argument('-v','--video', type = str, help = "Downloads a video if a valid url is provided.")
+parser.add_argument('-v','--video', type = str, help = "Downloads a video if a valid URL is provided.")
 
 # add arg for playlist download
-parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid url is provided.")
+parser.add_argument('-p', '--playlist', type = str, help = "Downloads a YouTube playlist if valid URL is provided.")
 args = parser.parse_args()
 
 # Executes function if arg called
