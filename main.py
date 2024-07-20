@@ -27,8 +27,7 @@ def remove_emojis(data):
         u"\u23e9"
         u"\u231a"
         u"\ufe0f"  # dingbats
-        u"\u3030"
-                      "]+", re.UNICODE)
+        u"\u3030""]+", re.UNICODE)
     return re.sub(emoj, '', data)
 
 # function to convert a string into alphanumeric text.
@@ -56,6 +55,8 @@ def downloadVideo(url):
     # open the file that is grabbed from requests and saves it
     with open(f"{ytTitle}.jpg", 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
+
+    # delete the request
     del response
 
     # get the video stream
@@ -104,6 +105,8 @@ def downloadPlaylist(url):
         # open the file that is grabbed from requests and saves it
         with open(f"{ytTitle}.jpg", 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
+        
+        # delete the request
         del response
         
         # gets the video stream
